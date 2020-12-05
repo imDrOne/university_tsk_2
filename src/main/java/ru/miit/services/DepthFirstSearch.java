@@ -43,7 +43,7 @@ public class DepthFirstSearch implements IGraphable {
     @Override
     public void addEdge(int v, int w, @Nullable Integer cost) {
         adj[v].add(w); // Add w to v's list.
-        ref.addEdge(v, w, null);
+        ref.addEdge(v, w, cost);
     }
 
     // A function used by DFS
@@ -67,7 +67,7 @@ public class DepthFirstSearch implements IGraphable {
     // DFSUtil()
     @Override
     public void find(int v) {
-        System.out.println("[DECORATOR] Depth first search starts...");
+        System.out.println("\n[DECORATOR] Depth first search starts...");
         // Mark all the vertices as
         // not visited(set as
         // false by default in java)

@@ -34,7 +34,7 @@ public class BreadthFirstSearch implements IGraphable {
     // prints BFS traversal from a given source s
     @Override
     public void find(int s) {
-        System.out.println("Breadth first search starts...");
+        System.out.println("\nBreadth first search starts...");
 
         // Mark all the vertices as not visited(By default
         // set as false)

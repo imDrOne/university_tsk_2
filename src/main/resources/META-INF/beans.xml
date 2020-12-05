@@ -5,7 +5,7 @@
                       http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
        bean-discovery-mode="all">
     <decorators>
-<!--        <class>ru.miit.services.DepthFirstSearch</class>-->
+        <class>ru.miit.services.DepthFirstSearch</class>
         <class>ru.miit.services.FinderByDijkstra</class>
     </decorators>
 </beans>

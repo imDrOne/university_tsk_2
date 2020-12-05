@@ -47,13 +47,13 @@ public class FinderByDijkstra implements IGraphable {
     public void addEdge(int v, int w, Integer cost) {
         this.adj.get(v).add(new Node(w, cost));
 
-        ref.addEdge(v, w, null);
+        ref.addEdge(v, w, cost);
     }
 
     // Function for Dijkstra's Algorithm
     @Override
     public void find(int src) {
-        System.out.println("[DECORATOR] Dijjkstra search starts...");
+        System.out.println("\n[DECORATOR] Dijjkstra search starts...");
 
         for (int i = 0; i < V; i++)
             dist[i] = Integer.MAX_VALUE;
