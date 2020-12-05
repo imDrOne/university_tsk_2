@@ -3,10 +3,20 @@ package ru.miit.services;
 import org.jetbrains.annotations.Nullable;
 import ru.miit.interfaces.IGraphable;
 
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+@Decorator
 public class DepthFirstSearch implements IGraphable {
+
+    @Inject
+    @Delegate
+    IGraphable ref;
+
     // Array  of lists for
     // Adjacency List Representation
     private LinkedList<Integer> adj[];
@@ -21,8 +31,11 @@ public class DepthFirstSearch implements IGraphable {
     public void init(int v) {
         V = v;
         adj = new LinkedList[v];
-        for (int i = 0; i < v; ++i)
+        for (int i = 0; i < v; ++i) {
             adj[i] = new LinkedList();
+        }
+
+        ref.init(v);
     }
 
 
@@ -30,6 +43,7 @@ public class DepthFirstSearch implements IGraphable {
     @Override
     public void addEdge(int v, int w, @Nullable Integer cost) {
         adj[v].add(w); // Add w to v's list.
+        ref.addEdge(v, w, null);
     }
 
     // A function used by DFS
@@ -53,6 +67,7 @@ public class DepthFirstSearch implements IGraphable {
     // DFSUtil()
     @Override
     public void find(int v) {
+        System.out.println("[DECORATOR] Depth first search starts...");
         // Mark all the vertices as
         // not visited(set as
         // false by default in java)
@@ -62,5 +77,7 @@ public class DepthFirstSearch implements IGraphable {
         // function to print DFS
         // traversal
         DFSUtil(v, visited);
+
+        ref.find(v);
     }
 }

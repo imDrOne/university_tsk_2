@@ -3,9 +3,19 @@ package ru.miit.services;
 import ru.miit.interfaces.IGraphable;
 import ru.miit.utils.Node;
 
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 import java.util.*;
 
+@Decorator
 public class FinderByDijkstra implements IGraphable {
+
+    @Inject
+    @Delegate
+    IGraphable ref;
+
     public int[] dist;
     private Set<Integer> settled;
     private PriorityQueue<Node> pq;
@@ -29,16 +39,22 @@ public class FinderByDijkstra implements IGraphable {
             List<Node> item = new ArrayList<>();
             this.adj.add(item);
         }
+
+        ref.init(V);
     }
 
     @Override
     public void addEdge(int v, int w, Integer cost) {
         this.adj.get(v).add(new Node(w, cost));
+
+        ref.addEdge(v, w, null);
     }
 
     // Function for Dijkstra's Algorithm
     @Override
     public void find(int src) {
+        System.out.println("[DECORATOR] Dijjkstra search starts...");
+
         for (int i = 0; i < V; i++)
             dist[i] = Integer.MAX_VALUE;
 
@@ -59,6 +75,12 @@ public class FinderByDijkstra implements IGraphable {
 
             e_Neighbours(u);
         }
+
+        System.out.println("The shorted path from node :");
+        for (int i = 0; i < dist.length; i++)
+            System.out.println(src + " to " + i + " is " + dist[i]);
+
+        ref.find(src);
     }
 
     // Function to process all the neighbours

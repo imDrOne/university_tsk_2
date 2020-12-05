@@ -2,10 +2,11 @@ package ru.miit.services;
 
 import org.jetbrains.annotations.Nullable;
 import ru.miit.interfaces.IGraphable;
-import ru.miit.utils.Node;
 
-import java.util.*;
+import javax.enterprise.inject.Default;
+import java.util.LinkedList;
 
+@Default
 public class BreadthFirstSearch implements IGraphable {
     private int V;   // No. of vertices
     private LinkedList[] adj; //Adjacency Lists
@@ -33,6 +34,8 @@ public class BreadthFirstSearch implements IGraphable {
     // prints BFS traversal from a given source s
     @Override
     public void find(int s) {
+        System.out.println("Breadth first search starts...");
+
         // Mark all the vertices as not visited(By default
         // set as false)
         boolean visited[] = new boolean[V];
