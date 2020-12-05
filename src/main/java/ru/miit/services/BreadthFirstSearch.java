@@ -5,16 +5,21 @@ import ru.miit.utils.Node;
 
 import java.util.*;
 
-public class FinderByLeast {
+public class BreadthFirstSearch {
     private int V;   // No. of vertices
-    private LinkedList<Integer> adj[]; //Adjacency Lists
+    private LinkedList[] adj; //Adjacency Lists
 
     // Constructor
-    public FinderByLeast(int v) {
+    public BreadthFirstSearch(int v) {
+       super();
+    }
+
+    public void init(int v) {
         V = v;
         adj = new LinkedList[v];
-        for (int i = 0; i < v; ++i)
+        for (int i = 0; i < v; ++i) {
             adj[i] = new LinkedList();
+        }
     }
 
     // Function to add an edge into the graph
@@ -29,7 +34,7 @@ public class FinderByLeast {
         boolean visited[] = new boolean[V];
 
         // Create a queue for BFS
-        LinkedList<Integer> queue = new LinkedList<Integer>();
+        LinkedList<Integer> queue = new LinkedList<>();
 
         // Mark the current node as visited and enqueue it
         visited[s] = true;
@@ -43,9 +48,7 @@ public class FinderByLeast {
             // Get all adjacent vertices of the dequeued vertex s
             // If a adjacent has not been visited, then mark it
             // visited and enqueue it
-            Iterator<Integer> i = adj[s].listIterator();
-            while (i.hasNext()) {
-                int n = i.next();
+            for (int n : (Iterable<Integer>) adj[s]) {
                 if (!visited[n]) {
                     visited[n] = true;
                     queue.add(n);

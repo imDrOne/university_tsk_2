@@ -5,5 +5,5 @@ import ru.miit.utils.Node;
 import java.util.ArrayList;
 
 public interface IGraphable {
-    public String find(int adjacencyMatrix[][]);
+    String find(int[][] adjacencyMatrix);
 }
