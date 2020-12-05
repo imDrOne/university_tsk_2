@@ -1,9 +1,9 @@
 package ru.miit.interfaces;
 
-import ru.miit.utils.Node;
-
-import java.util.ArrayList;
+import org.jetbrains.annotations.Nullable;
 
 public interface IGraphable {
-    String find(int[][] adjacencyMatrix);
+    void find(int src);
+    void addEdge(int v, int w, @Nullable Integer cost);
+    void init(int v);
 }

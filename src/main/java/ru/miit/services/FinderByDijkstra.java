@@ -1,34 +1,44 @@
 package ru.miit.services;
 
+import ru.miit.interfaces.IGraphable;
 import ru.miit.utils.Node;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
-public class FinderByDijkstra {
+public class FinderByDijkstra implements IGraphable {
     public int[] dist;
     private Set<Integer> settled;
     private PriorityQueue<Node> pq;
     private int V; // Number of vertices
-    List<List<Node>> adj;
+    private List<List<Node>> adj;
 
     public FinderByDijkstra() {
         super();
     }
 
+    @Override
     public void init(int V) {
         this.V = V;
         dist = new int[V];
         settled = new HashSet<>();
         pq = new PriorityQueue<>(V, new Node());
+        adj = new ArrayList<>();
+
+
+        for (int i = 0; i < V; i++) {
+            List<Node> item = new ArrayList<>();
+            this.adj.add(item);
+        }
+    }
+
+    @Override
+    public void addEdge(int v, int w, Integer cost) {
+        this.adj.get(v).add(new Node(w, cost));
     }
 
     // Function for Dijkstra's Algorithm
-    public void dijkstra(List<List<Node>> adj, int src) {
-        this.adj = adj;
-
+    @Override
+    public void find(int src) {
         for (int i = 0; i < V; i++)
             dist[i] = Integer.MAX_VALUE;
 

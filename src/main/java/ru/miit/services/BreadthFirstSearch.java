@@ -1,19 +1,21 @@
 package ru.miit.services;
 
+import org.jetbrains.annotations.Nullable;
 import ru.miit.interfaces.IGraphable;
 import ru.miit.utils.Node;
 
 import java.util.*;
 
-public class BreadthFirstSearch {
+public class BreadthFirstSearch implements IGraphable {
     private int V;   // No. of vertices
     private LinkedList[] adj; //Adjacency Lists
 
     // Constructor
-    public BreadthFirstSearch(int v) {
+    public BreadthFirstSearch() {
        super();
     }
 
+    @Override
     public void init(int v) {
         V = v;
         adj = new LinkedList[v];
@@ -23,12 +25,14 @@ public class BreadthFirstSearch {
     }
 
     // Function to add an edge into the graph
-    public void addEdge(int v, int w) {
+    @Override
+    public void addEdge(int v, int w, @Nullable Integer cost) {
         adj[v].add(w);
     }
 
     // prints BFS traversal from a given source s
-    public void BFS(int s) {
+    @Override
+    public void find(int s) {
         // Mark all the vertices as not visited(By default
         // set as false)
         boolean visited[] = new boolean[V];

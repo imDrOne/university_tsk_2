@@ -1,19 +1,23 @@
 package ru.miit.services;
 
+import org.jetbrains.annotations.Nullable;
+import ru.miit.interfaces.IGraphable;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class DepthFirstSearch {
+public class DepthFirstSearch implements IGraphable {
     // Array  of lists for
     // Adjacency List Representation
     private LinkedList<Integer> adj[];
     private int V; // No. of vertices
 
     // Constructor
-    public DepthFirstSearch(int v) {
+    public DepthFirstSearch() {
         super();
     }
 
+    @Override
     public void init(int v) {
         V = v;
         adj = new LinkedList[v];
@@ -21,8 +25,10 @@ public class DepthFirstSearch {
             adj[i] = new LinkedList();
     }
 
+
     // Function to add an edge into the graph
-    public void addEdge(int v, int w) {
+    @Override
+    public void addEdge(int v, int w, @Nullable Integer cost) {
         adj[v].add(w); // Add w to v's list.
     }
 
@@ -45,7 +51,8 @@ public class DepthFirstSearch {
     // The function to do DFS traversal.
     // It uses recursive
     // DFSUtil()
-    public void DFS(int v) {
+    @Override
+    public void find(int v) {
         // Mark all the vertices as
         // not visited(set as
         // false by default in java)
